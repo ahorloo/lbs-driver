@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard - Fleet Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1 class="text-primary">📊 Dashboard</h1>
+  <p>Welcome to the Fleet Dashboard!</p>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card shadow-sm mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Daily Report</h5>
+          <p class="card-text">View today’s trips and insights.</p>
+          <a href="{{ url_for('main.daily_report') }}" class="btn btn-primary">View Daily Report</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-sm mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Upload Data</h5>
+          <p class="card-text">Upload CSV or JSON reports to the system.</p>
+          <a href="{{ url_for('main.upload') }}" class="btn btn-success">Upload</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

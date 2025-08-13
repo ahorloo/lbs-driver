@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <h2 class="text-center fw-bold mb-4">📘 Finalized Logbook Entries</h2>
+
+    {% if grouped_entries %}
+        <div class="accordion" id="finalizeAccordion">
+            {% for date, entries in grouped_entries.items() %}
+                <div class="accordion-item mb-4 shadow-sm rounded-3 border border-1">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}">
+                            📅 {{ date }}
+                        </button>
+                    </h2>
+                    <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#finalizeAccordion">
+                        <div class="accordion-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover align-middle">
+                                    <thead class="table-dark text-light">
+                                        <tr>
+                                            <th>Trip No</th>
+                                            <th>Consignee</th>
+                                            <th>Terminal</th>
+                                            <th>Destination</th>
+                                            <th>Truck No</th>
+                                            <th>Pickup Date</th>
+                                            <th>Offloading Date</th>
+                                            <th>Fuel</th>
+                                            <th>Road Expense</th>
+                                            <th>Toll</th>
+                                            <th>Advance Payment</th>
+                                            <th>No of Containers</th>
+                                            <th>Unit Price</th>
+                                            <th>Rate</th>
+                                            <th>Invoice Date</th>
+                                            <th>Payment Received Date</th>
+                                            <th>Mode of Payment</th>
+                                            <th>Remarks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for entry in entries %}
+                                            <tr>
+                                                <td>{{ entry.trip_no or 'N/A' }}</td>
+                                                <td>{{ entry.consignee or 'N/A' }}</td>
+                                                <td>{{ entry.terminal or 'N/A' }}</td>
+                                                <td>{{ entry.destination or 'N/A' }}</td>
+                                                <td>{{ entry.truck_no or 'N/A' }}</td>
+                                                <td>{{ entry.pickup_date or 'N/A' }}</td>
+                                                <td>{{ entry.offloading_date or 'N/A' }}</td>
+                                                <td>{{ entry.fuel or 'N/A' }}</td>
+                                                <td>{{ entry.road_expense or 'N/A' }}</td>
+                                                <td>{{ entry.toll or 'N/A' }}</td>
+                                                <td>{{ entry.advance_payment or 'N/A' }}</td>
+                                                <td>{{ entry.no_of_cont or 'N/A' }}</td>
+                                                <td>{{ entry.unit_price or 'N/A' }}</td>
+                                                <td>{{ entry.rate or 'N/A' }}</td>
+                                                <td>{{ entry.invoice_date or 'N/A' }}</td>
+                                                <td>{{ entry.payment_rec_date or 'N/A' }}</td>
+                                                <td>{{ entry.mode_of_payment or 'N/A' }}</td>
+                                                <td>{{ entry.remarks or 'N/A' }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted text-center">No finalized logbook entries found. Start adding some entries first 🚚📄</p>
+    {% endif %}
+</div>
+{% endblock %}

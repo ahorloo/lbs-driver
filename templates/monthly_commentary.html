@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="text-center">Monthly Commentary – {{ current_month }} {{ current_year }}</h2>
+
+    {% if monthly_trips %}
+      {% for truck, trips in monthly_trips.items() %}
+        <div class="card mt-3">
+          <div class="card-header bg-primary text-white">
+            {{ truck }}
+          </div>
+          <div class="card-body">
+            <p>Total Trips: {{ trips|length }}</p>
+            <ul class="list-group">
+              {% for trip in trips %}
+                <li class="list-group-item">
+                  <strong>{{ trip.start_location }}</strong> → <strong>{{ trip.end_location }}</strong>
+                  | Distance: {{ trip.distance }} km | Date: {{ trip.created_at.strftime('%Y-%m-%d') }}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No trips found this month.</p>
+    {% endif %}
+  </div>
+{% endblock %}

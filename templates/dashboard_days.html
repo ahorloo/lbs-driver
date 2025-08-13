@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Select Day{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-primary">📅 {{ calendar.month_name[month] }} {{ year }} — Select a Day</h2>
+  <div class="row row-cols-4 row-cols-md-7 g-2 mt-4">
+    {% for day in days %}
+    <div class="col">
+      <a href="{{ url_for('main.dashboard_day_trips', year=year, month=month, day=day) }}" class="btn btn-light w-100">
+        {{ day }}
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Daily Report{% endblock %}
+
+{% block content %}
+<h1 class="mt-4">📅 Daily Report: {{ year }}-{{ month }}-{{ day }}</h1>
+
+{% for display_name, trips in trips_by_device.items() %}
+<div class="card my-4 shadow">
+  <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">🚛 {{ display_name }}</h5>
+    <span class="fw-bold">👨🏾‍✈️ Driver: {{ trips[0].driver_name }}</span>
+  </div>
+  <div class="card-body p-3">
+    <div class="table-responsive">
+      <table class="table table-sm table-bordered table-striped align-middle">
+        <thead class="table-primary">
+          <tr class="text-center">
+            <th>Start Location</th>
+            <th>End Location</th>
+            <th>Date</th>
+            <th>Stop Duration</th>
+            <th>Idle Duration</th>
+            <th>Engine Work</th>
+            <th>Engine Hours</th>
+            <th>Travel Time</th>
+            <th>Over Speeding</th>
+            <th>Distance (km)</th>
+            <th>Trip Start Time</th>
+            <th>Trip End Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for trip in trips %}
+          <tr>
+            <td>{{ trip.start_location }}</td>
+            <td>{{ trip.end_location }}</td>
+            <td>{{ trip.created_at.strftime('%Y-%m-%d') if trip.created_at else '' }}</td>
+            <td>{{ trip.stop_duration }}</td>
+            <td>{{ trip.idle_duration or 'N/A' }}</td>
+            <td>{{ trip.engine_work or 'N/A' }}</td>
+            <td>{{ trip.engine_hours or 'N/A' }}</td>
+            <td>{{ trip.move_duration }}</td>
+            <td>{{ trip.overspeed_count }}</td>
+            <td>{{ trip.route_length_km }}</td>
+            <td>{{ trip.trip_start }}</td>
+            <td>{{ trip.trip_end }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

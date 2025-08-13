@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Select Month{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-primary">📆 {{ year }} — Choose a Month</h2>
+
+  {% if months %}
+  <div class="row row-cols-2 row-cols-md-4 g-3 mt-4">
+    {% for month in months %}
+    <div class="col">
+      <a href="{{ url_for('main.dashboard_days', year=year, month=month) }}" class="btn btn-outline-primary w-100">
+        {{ month_names[month] }}
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="mt-4 text-muted">No months found for {{ year }}. Try uploading a report!</p>
+  {% endif %}
+</div>
+{% endblock %}

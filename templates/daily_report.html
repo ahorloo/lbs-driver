@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Daily Report - Fleet Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-center text-primary mb-4">
+    📅 Daily Report for {{ date_start }}
+  </h2>
+
+  {% if devices %}
+    {% for display_name, trips in devices.items() %}
+    <div class="card mb-4 shadow-sm border-start border-4 border-info">
+      <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+          🚛 <strong class="text-warning">{{ display_name }}</strong>
+        </h5>
+        <span class="badge bg-light text-dark">
+          {{ trips|length }} trip{{ trips|length > 1 and 's' or '' }}
+        </span>
+      </div>
+
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover table-sm m-0 text-center align-middle">
+            <thead class="table-light">
+              <tr class="fw-bold">
+                <th>Start Location</th>
+                <th>End Location</th>
+                <th>Date</th>
+                <th>Stop Duration</th>
+                <th>Idle Duration</th>
+                <th>Engine Work</th>
+                <th>Engine Hours</th>
+                <th>Travel Time</th>
+                <th>Over Speeding</th>
+                <th>Distance (km)</th>
+                <th>Trip Start</th>
+                <th>Trip End</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for trip in trips %}
+              <tr>
+                <td>{{ trip.start_location or '-' }}</td>
+                <td>{{ trip.end_location or '-' }}</td>
+                <td>{{ trip.date or '-' }}</td>
+                <td>{{ trip.stop_duration or '-' }}</td>
+                <td>{{ trip.idle_duration or '-' }}</td>
+                <td>{{ trip.engine_work or '-' }}</td>
+                <td>{{ trip.engine_hours or '-' }}</td>
+                <td>{{ trip.travel_time or '-' }}</td>
+                <td>{{ trip.over_speeding or '-' }}</td>
+                <td>{{ trip.distance_travelled or '-' }}</td>
+                <td>{{ trip.trip_start_time or '-' }}</td>
+                <td>{{ trip.trip_end_time or '-' }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-warning text-center">
+      🛑 No trips found for this date! <br>
+      <small>Try refreshing or check if data was uploaded.</small>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Assign Locations - Fleet Dashboard{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="mb-4 text-primary">📍 Assign Locations for Devices</h1>
+  <p>Enter the start and end locations for each device. Also pick the date for these trips.</p>
+
+  <form method="POST" action="{{ url_for('main.save_trips') }}">
+    {% for device in devices %}
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-secondary">{{ device }}</h5>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <input name="{{ device }}_start" placeholder="Start Location" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <input name="{{ device }}_end" placeholder="End Location" class="form-control" required>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    <div class="card my-4 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">📅 Select Trip Date</h5>
+        <input type="date" name="trip_date" class="form-control" required>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success btn-lg mt-3">✅ Save Trips</button>
+  </form>
+</div>
+{% endblock %}

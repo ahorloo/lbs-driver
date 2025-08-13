@@ -1,0 +1,19 @@
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables
+.env
+
+# Uploaded files
+uploads/
+
+# Mac system files
+.DS_Store
+
+static/videos/

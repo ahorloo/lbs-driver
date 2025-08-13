@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Weekly Summary{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="text-primary">
+    📅 Weekly Summary — Year: {{ year }}, Month: {{ month_name }}, Week: {{ week }}
+  </h2>
+
+  {% if trips_by_device %}
+    {% for device, trips in trips_by_device.items() %}
+      <div class="card my-3">
+        <div class="card-header bg-primary text-white">
+          🚗 {{ device }}
+        </div>
+        <div class="card-body">
+          <table class="table table-sm table-bordered">
+            <thead class="table-light">
+              <tr>
+                <th>Start Location</th>
+                <th>End Location</th>
+                <th>Date</th>
+                <th>Distance</th>
+                <th>Travel Time</th>
+                <th>Over Speeding</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for trip in trips %}
+                <tr>
+                  <td>{{ trip.start_location }}</td>
+                  <td>{{ trip.end_location }}</td>
+                  <td>{{ trip.created_at.strftime('%Y-%m-%d') if trip.created_at else '' }}</td>
+                  <td>{{ trip.route_length_km }}</td>
+                  <td>{{ trip.move_duration }}</td>
+                  <td>{{ trip.overspeed_count }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="text-muted">No trips found for this week.</p>
+  {% endif %}
+</div>
+{% endblock %}
