@@ -7,13 +7,37 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Environment variables
+# Env files (and variants)
 .env
+.env.*
+!.env.example   # keep a template if you want
+
+# Flask instance + local DBs
+instance/
+*.sqlite3
+*.db
 
 # Uploaded files
 uploads/
 
-# Mac system files
-.DS_Store
-
+# Media you don't want in git
 static/videos/
+
+# OS / Editors
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Logs & test artifacts
+*.log
+.pytest_cache/
+.coverage
+htmlcov/
+
+# DB dumps / accidental exports
+*dump*.sql
+backup*.sql
+
+# Ignore editor/backup .save files
+*.save
